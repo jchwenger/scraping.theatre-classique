@@ -61,6 +61,10 @@ def make_regices():
         "cace_dédi": regex.compile("^\s*[AÀ] ", regex.UNICODE),
         "various_riddances": [
             regex.compile(
+                "^\s*© Théâtre classique - Version du texte",
+                regex.UNICODE | regex.IGNORECASE,
+            ),
+            regex.compile(
                 "^\s*[ÉE]dition .*(d|établie|soutien|critique)",
                 regex.UNICODE | regex.IGNORECASE,
             ),
@@ -150,7 +154,7 @@ def datasetize(fname, out_fname, in_dir, out_dir, regices, args):
         if not incipit:
             purged = [args.start] + purged
 
-        # remove empty docs (only ["<|débutderéplique|>", # "<|finderéplique|>"])
+        # remove empty docs (only ["<|s|>", # "<|e|>"])
         if len(purged) <= 2:
             return
 
@@ -176,8 +180,8 @@ def clean_dir(out_dir):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-        description="""Turning clean .txt Théâtre Classique files
-        into a dataset (notably: adding <startoflines> and <endoflines> and
+        description="""Turning Théâtre Classique scraped html files
+        into a dataset (notably: adding <|s|> and <|e|> and
         other markers."""
     )
 
@@ -186,7 +190,8 @@ if __name__ == "__main__":
         "--dir",
         type=str,
         default="théâtre-classique-source",
-        help="The directory containing the .txt files, defaults to théâtre-classique",
+        help="""The directory containing the .txt files, defaults to
+        théâtre-classique-source""",
     )
 
     parser.add_argument(
@@ -195,7 +200,7 @@ if __name__ == "__main__":
         type=str,
         default="théâtre-classique-dataset",
         help="""The directory containing the .txt files, defaults to
-        théâtre-classique-clean""",
+        théâtre-classique-dataset""",
     )
 
     parser.add_argument(
