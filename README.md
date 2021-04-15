@@ -1,6 +1,6 @@
 # Scraping Théâtre Classique
 
-Extracting all course texts from [Théâtre Classique](http://www.theatre-classique.fr/pages/programmes/PageEdition.php).
+Extracting all plays from [Théâtre Classique](http://www.theatre-classique.fr/pages/programmes/PageEdition.php).
 
 Using Python 3, [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) and [regex](https://pypi.org/project/regex/).
 
